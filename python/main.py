@@ -17,8 +17,8 @@ def main():
     print("Merge Sorted Array")
     merge_list1 = [1, 2, 3, 0, 0, 0]
     merge_list2 = [2, 5, 6]
-    merge_result = merge(merge_list1, 3, merge_list2, 3)
-    print(merge_result)
+    merge_list1 = merge(merge_list1, 3, merge_list2, 3)
+    print(merge_list1)
     print("___________________________________________________________________")
 
 
