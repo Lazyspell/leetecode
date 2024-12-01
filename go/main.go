@@ -15,8 +15,11 @@ func main() {
 	fmt.Println("_______________________________________________________________")
 	fmt.Println("Remove Element")
 	removeResult := removeElement([]int{3, 2, 2, 3}, 3)
-	fmt.Println("_______________________________________________________________")
 	fmt.Println(removeResult)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Remove Duplicates from Sorted Array II")
+	removeResult := removeElement([]int{3, 2, 2, 3}, 3)
+	fmt.Println("_______________________________________________________________")
 }
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
@@ -42,6 +45,20 @@ func removeElement(nums []int, val int) int {
 	counter := 0
 	for _, value := range nums {
 		if value != val {
+			nums[counter] = value
+			counter++
+		}
+	}
+	return counter
+}
+
+func removeDuplicates(nums []int) int {
+	counterMap := make(map[int]int)
+	counter := 0
+
+	for _, value := range nums {
+		counterMap[value]++
+		if counterMap[value] <= 2 {
 			nums[counter] = value
 			counter++
 		}
