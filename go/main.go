@@ -18,7 +18,12 @@ func main() {
 	fmt.Println(removeResult)
 	fmt.Println("_______________________________________________________________")
 	fmt.Println("Remove Duplicates from Sorted Array II")
-	removeResult := removeElement([]int{3, 2, 2, 3}, 3)
+	removeElementResult := removeElement([]int{3, 2, 2, 3}, 3)
+	fmt.Println(removeElementResult)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Majority Element")
+	majorityElementResult := majorityElement([]int{2, 4, 4, 1, 4, 4, 2})
+	fmt.Println(majorityElementResult)
 	fmt.Println("_______________________________________________________________")
 }
 
@@ -64,4 +69,20 @@ func removeDuplicates(nums []int) int {
 		}
 	}
 	return counter
+}
+
+func majorityElement(nums []int) int {
+	currentElement, elementCount := 0, 0
+	for _, value := range nums {
+		if elementCount == 0 {
+			currentElement = value
+		}
+
+		if currentElement != value {
+			elementCount--
+		} else {
+			elementCount++
+		}
+	}
+	return currentElement
 }
