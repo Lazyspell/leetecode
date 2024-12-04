@@ -25,6 +25,14 @@ func main() {
 	majorityElementResult := majorityElement([]int{2, 4, 4, 1, 4, 4, 2})
 	fmt.Println(majorityElementResult)
 	fmt.Println("_______________________________________________________________")
+	fmt.Println("Fibonacci linear")
+	fibResult := fib(6)
+	fmt.Println(fibResult)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Fibonacci recursive")
+	fibonacciResult := fibonacci(6)
+	fmt.Println(fibonacciResult)
+	fmt.Println("_______________________________________________________________")
 }
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
@@ -85,4 +93,22 @@ func majorityElement(nums []int) int {
 		}
 	}
 	return currentElement
+}
+
+func fib(num int) int {
+	ans := []int{0, 1}
+
+	for i := 2; i < num+1; i++ {
+		ans = append(ans, ans[i-1]+ans[i-2])
+	}
+	fmt.Println(ans)
+	return ans[num]
+}
+
+func fibonacci(num int) int {
+	if num <= 1 {
+		return num
+	}
+
+	return fibonacci(num-1) + fibonacci(num-2)
 }
