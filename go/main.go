@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"regexp"
 	"sort"
+	"strings"
 )
 
 func main() {
@@ -47,6 +49,10 @@ func main() {
 	productExceptSelfList := []int{7, 1, 5, 3, 6, 4}
 	productExceptSelfResult := productExceptSelf(productExceptSelfList)
 	fmt.Println(productExceptSelfResult)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Valid Palindrome")
+	palindromeResult := isPalindrome("A man, a plan, a canal: Panama")
+	fmt.Println(palindromeResult)
 	fmt.Println("_______________________________________________________________")
 }
 
@@ -176,4 +182,14 @@ func productExceptSelf(nums []int) []int {
 	}
 
 	return result
+}
+func isPalindrome(s string) bool {
+	re := regexp.MustCompile(`[^0-9a-zA-Z]+`)
+	clean := strings.ToLower(re.ReplaceAllString(s, ""))
+	for i := 0; i < len(clean)/2; i++ {
+		if clean[i] != clean[len(clean)-1-i] {
+			return false
+		}
+	}
+	return true
 }
