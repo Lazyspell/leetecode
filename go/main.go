@@ -12,6 +12,7 @@ func main() {
 	nums1 := []int{1, 2, 3, 0, 0, 0}
 	nums2 := []int{4, 5, 6}
 	merge2(nums1, 3, nums2, 3)
+	fmt.Println(nums1)
 	fmt.Println("_______________________________________________________________")
 	fmt.Println("Remove Element")
 	removeResult := removeElement([]int{3, 2, 2, 3}, 3)
@@ -33,16 +34,28 @@ func main() {
 	fibonacciResult := fibonacci(6)
 	fmt.Println(fibonacciResult)
 	fmt.Println("_______________________________________________________________")
+	fmt.Println("Rotate Array")
+	rotateList := []int{1, 2, 3, 4, 5, 6, 7}
+	rotate(rotateList, 3)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Best Time to Buy and Sell Stock")
+	maxProfitList := []int{7, 1, 5, 3, 6, 4}
+	maxProfitResult := maxProfit(maxProfitList)
+	fmt.Println("maxProfit:", maxProfitResult)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Product of Array Except Self")
+	productExceptSelfList := []int{7, 1, 5, 3, 6, 4}
+	productExceptSelfResult := productExceptSelf(productExceptSelfList)
+	fmt.Println(productExceptSelfResult)
+	fmt.Println("_______________________________________________________________")
 }
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
-	// slice slicing at the m becaus we all we want is nums1 without the extra zeros then append and sort nums2
 	sort.Ints(append(nums1[:m], nums2...))
 }
 
 func merge2(nums1 []int, m int, nums2 []int, n int) {
 	i, j, k := m-1, n-1, m+n-1
-	fmt.Println(i, j, k)
 	for ; j >= 0; k-- {
 		if i >= 0 && nums1[i] > nums2[j] {
 			nums1[k] = nums1[i]
@@ -66,6 +79,16 @@ func removeElement(nums []int, val int) int {
 }
 
 func removeDuplicates(nums []int) int {
+	counter := 1
+	for i := 1; i < len(nums); i++ {
+		if nums[i] != nums[i-1] {
+			nums[counter] = nums[i]
+			counter++
+		}
+	}
+	return counter
+}
+func removeDuplicates2(nums []int) int {
 	counterMap := make(map[int]int)
 	counter := 0
 
@@ -111,4 +134,46 @@ func fibonacci(num int) int {
 	}
 
 	return fibonacci(num-1) + fibonacci(num-2)
+}
+
+func rotate(nums []int, k int) {
+	if len(nums) < k {
+		k = k % len(nums)
+	}
+	right := len(nums) - k
+
+	copy(nums, append(nums[right:], nums[:right]...))
+}
+
+func maxProfit(prices []int) int {
+	maxProfit, left, right := 0, 0, 1
+
+	for right < len(prices) {
+		if prices[left] < prices[right] {
+			maxProfit = max(maxProfit, prices[right]-prices[left])
+		} else {
+			left = right
+		}
+		right++
+	}
+
+	return maxProfit
+}
+
+func productExceptSelf(nums []int) []int {
+	result := make([]int, len(nums))
+	pre := 1
+
+	for index, value := range nums {
+		result[index] = pre
+		pre *= value
+	}
+
+	post := 1
+	for i := len(nums) - 1; i >= 0; i-- {
+		result[i] *= post
+		post *= nums[i]
+	}
+
+	return result
 }
