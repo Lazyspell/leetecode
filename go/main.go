@@ -65,6 +65,10 @@ func main() {
 	acronymResult := acronym([]string{"alice", "bob", "charlie"}, "abc")
 	fmt.Println(acronymResult)
 	fmt.Println("_______________________________________________________________")
+	fmt.Println("Two Sum Problem")
+	twoSum := twoSum([]int{2, 7, 11, 15}, 9)
+	fmt.Println(twoSum)
+	fmt.Println("_______________________________________________________________")
 }
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
@@ -227,4 +231,16 @@ func acronym(strs []string, s string) bool {
 		}
 	}
 	return true
+}
+func twoSum(nums []int, target int) []int {
+	counterMap := make(map[int]int)
+
+	for index, value := range nums {
+		if _, ok := counterMap[value]; ok {
+			return []int{counterMap[value], index}
+		} else {
+			counterMap[target-value] = index
+		}
+	}
+	return []int{}
 }
