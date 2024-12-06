@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+
+	clean := strings.Split(strings.Join(strings.Fields("this is    what w  we are   trying to avoid"), " "), " ")
+	fmt.Println(clean)
 	fmt.Println("golang leetcode")
 	fmt.Println("_______________________________________________________________")
 	fmt.Println("Merge Sorted Array")
@@ -53,6 +56,14 @@ func main() {
 	fmt.Println("Valid Palindrome")
 	palindromeResult := isPalindrome("A man, a plan, a canal: Panama")
 	fmt.Println(palindromeResult)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Find the Index of the First Occurrence in a String")
+	haystckResult := strStr("hello", "ll")
+	fmt.Println(haystckResult)
+	fmt.Println("_______________________________________________________________")
+	fmt.Println("Check if a String Is an Acronym of Words")
+	acronymResult := acronym([]string{"alice", "bob", "charlie"}, "abc")
+	fmt.Println(acronymResult)
 	fmt.Println("_______________________________________________________________")
 }
 
@@ -188,6 +199,30 @@ func isPalindrome(s string) bool {
 	clean := strings.ToLower(re.ReplaceAllString(s, ""))
 	for i := 0; i < len(clean)/2; i++ {
 		if clean[i] != clean[len(clean)-1-i] {
+			return false
+		}
+	}
+	return true
+}
+
+func strStr(haystack string, needle string) int {
+	left := 0
+	for right := len(needle); right <= len(haystack); right++ {
+		if needle == haystack[left:right] {
+			return left
+		}
+		left++
+	}
+	return -1
+}
+
+func acronym(strs []string, s string) bool {
+	if len(strs) != len(s) {
+		return false
+	}
+
+	for index, value := range strs {
+		if value[0] != s[index] {
 			return false
 		}
 	}
